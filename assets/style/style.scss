@@ -339,17 +339,17 @@ main {
           background: #d42222;
           border-radius: 50px;
           gap: 8px;
-          background-image: url("../images/button_blik.png");
-          background-repeat: no-repeat;
-          background-position: bottom;
-          background-size: contain;
+          // background-image: url("../images/button_blik.png");
+          // background-repeat: no-repeat;
+          // background-position: bottom;
+          // background-size: contain;
 
           height: 68px;
           max-width: 280px;
 
-          font-family: "Inter";
+          // font-family: "Inter";
           font-weight: 700;
-          font-style: Bold;
+          // font-style: Bold;
           font-size: 14px;
           line-height: 140%;
           letter-spacing: 0%;
@@ -380,7 +380,7 @@ main {
           color: #d42222;
           height: 20px;
           margin-top: 16px;
-          margin-bottom: 26px;
+          margin-bottom: 72px;
         }
       }
     }
@@ -740,14 +740,12 @@ main {
           background: #d42222;
           border-radius: 50px;
           gap: 8px;
-          background-image: url("../images/button_blik.png");
-          background-repeat: no-repeat;
-          background-position: bottom;
-          background-size: contain;
+          // background-image: url("../images/button_blik.png");
+          // background-repeat: no-repeat;
+          // background-position: bottom;
+          // background-size: contain;
 
-          font-family: "Inter";
           font-weight: 700;
-          font-style: bold;
           font-size: 14px;
           line-height: 140%;
           letter-spacing: 0%;
@@ -932,7 +930,7 @@ main {
         font-style: italic;
         font-size: 40px;
         line-height: 44px;
-        letter-spacing: 3px;
+        letter-spacing: -3px;
         text-align: center;
         vertical-align: middle;
         text-transform: uppercase;
@@ -967,6 +965,11 @@ main {
           border: 1px solid #0d0d0d14;
           border-radius: 24px;
           padding: 24px;
+          display: none;
+
+          &.active {
+            display: block;
+          }
 
           & .question_title {
             font-weight: 400;
@@ -991,6 +994,34 @@ main {
             padding: 16px;
             background: #ffffff;
             border-radius: 16px;
+
+            &.active {
+              border: 1px solid #d4222240;
+              background: #d4222214;
+            }
+
+            input[type="radio"] {
+              appearance: none;
+              width: 14px;
+              height: 14px;
+              border: 1px solid #d42222;
+              border-radius: 50%;
+              background-color: #fff;
+              position: relative;
+              cursor: pointer;
+              transition: 0.2s;
+            }
+
+            input[type="radio"]:checked::after {
+              content: "";
+              position: absolute;
+              top: 1.5px;
+              left: 1.8px;
+              width: 9px;
+              height: 9px;
+              background: #d42222;
+              border-radius: 50%;
+            }
 
             &:not(:last-child) {
               margin-bottom: 8px;
@@ -1034,6 +1065,12 @@ main {
             justify-content: center;
             border: 1px dashed #0d0d0d;
             border-radius: 50px;
+
+            &.back_button {
+              border: none;
+              color: #0d0d0d80;
+              height: 26px;
+            }
           }
         }
       }
@@ -1433,8 +1470,9 @@ main {
       left: 0;
       right: 0;
       margin: 0 auto;
-      width: 106px;
-      height: 106px;
+      width: 92px;
+      height: 92px;
+      border-radius: 100%;
     }
 
     & h4 {
@@ -1557,6 +1595,138 @@ main {
       color: #0d0d0d80;
       max-width: 220px;
       margin: 0 auto 32px;
+    }
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  width: 100dvw;
+  height: 100dvh;
+  z-index: 9;
+  visibility: hidden;
+
+  &.active {
+    visibility: visible;
+  }
+
+  & .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    & .content {
+      position: relative;
+      padding: 52px 24px 24px;
+      background: #ffffff;
+      max-width: 296px;
+      width: 100%;
+      border-radius: 24px;
+
+      & .pre-title {
+        font-family: "Inter";
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 130%;
+        text-align: center;
+        color: #0d0d0d;
+      }
+
+      & .title {
+        font-family: "Montserrat";
+        font-weight: 800;
+        font-style: italic;
+        font-size: 28px;
+        line-height: 32px;
+        letter-spacing: -3px;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        background: linear-gradient(90deg, #d42222 28.65%, #f85858 69.97%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      & .description {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 130%;
+        text-align: center;
+        color: #0d0d0d80;
+        margin-bottom: 20px;
+      }
+
+      & ul {
+        position: relative;
+        padding-left: 28px;
+        margin-bottom: 20px;
+        & li {
+          color: #0d0d0d;
+
+          &:not(:last-child) {
+            margin-bottom: 6px;
+          }
+
+          &::before {
+            content: " ";
+            position: absolute;
+            background-image: url("../images/accepted_icon.svg");
+            width: 20px;
+            height: 20px;
+            left: 0;
+          }
+        }
+      }
+
+      & .button-list {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        & button {
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 130%;
+          letter-spacing: 0;
+          text-align: center;
+          text-transform: uppercase;
+          color: #0d0d0d;
+          margin-top: 12px;
+          height: 56px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          justify-content: center;
+          border: 1px dashed #0d0d0d;
+          border-radius: 50px;
+          background: transparent;
+
+          &.back_button {
+            border: none;
+            color: #0d0d0d80;
+            height: 26px;
+          }
+        }
+      }
+
+      & .close-button {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        width: 16px;
+        height: 16px;
+        background-image: url("../images/close_button.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        background-color: transparent;
+      }
     }
   }
 }
