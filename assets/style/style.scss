@@ -217,19 +217,16 @@ main {
     }
 
     & .name {
-      position: absolute;
+      padding-top: 52dvh;
+      width: 100%;
+      max-width: 100%;
+      margin-left: 20dvw;
       display: flex;
       flex-direction: column;
-      top: 66%;
-      right: 22%;
-      transform: translate(50%, -70%) !important;
+      align-items: center;
       z-index: 2;
       max-width: 136px;
       width: 100%;
-
-      @media screen and (max-height: 735px) {
-        top: 73%;
-      }
 
       & span {
         display: block;

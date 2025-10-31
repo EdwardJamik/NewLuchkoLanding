@@ -37,12 +37,13 @@
             <div class="title">Місяць 3.0</div> <span></span>
           </h2>
 
+
           <div class="name" data-aos="fade-up" data-aos-anchor-placement="center-center" data-aos-duration="2000">
             <span class="fullName">Геннадій Лучко</span>
             <span class="job">фітнес тренер </span>
           </div>
-
           <div class="triggers">
+
             <a href="#tarif_list" class="connected">приєднатися до нас <svg xmlns="http://www.w3.org/2000/svg"
                 width="12" height="13" viewBox="0 0 12 13" fill="none">
                 <path
@@ -963,6 +964,7 @@
   </script>
 
   <script>
+
     document.addEventListener("DOMContentLoaded", function () {
       const questions = document.querySelectorAll(".question-item")
       const popup = document.querySelector(".popup")
@@ -971,6 +973,15 @@
       questions.forEach(q => q.classList.remove("active"))
       const question1 = document.querySelector(".question-1")
       if (question1) question1.classList.add("active")
+
+      // Функція для очищення всіх відповідей
+      function clearAllAnswers() {
+        document.querySelectorAll(".question_answer").forEach(answer => {
+          answer.classList.remove("active")
+          const input = answer.querySelector('input[type="radio"]')
+          if (input) input.checked = false
+        })
+      }
 
       document.querySelectorAll(".question_answer").forEach(answer => {
         answer.addEventListener("click", () => {
@@ -995,8 +1006,6 @@
 
       const q1Next = question1?.querySelector("button:not(.back_button)")
       q1Next?.addEventListener("click", () => {
-        console.log('tut')
-
         const yes = question1.querySelector("#yes")
         const no = question1.querySelector("#no")
 
@@ -1017,7 +1026,10 @@
           else alert("Оберіть відповідь")
         })
 
-        backBtn2?.addEventListener("click", () => showQuestion("question-1"))
+        backBtn2?.addEventListener("click", () => {
+          clearAllAnswers() // Очищуємо всі відповіді при поверненні
+          showQuestion("question-1")
+        })
       }
 
       const question3 = document.querySelector(".question-3")
@@ -1032,7 +1044,10 @@
           else alert("Оберіть відповідь")
         })
 
-        backBtn3?.addEventListener("click", () => showQuestion("question-1"))
+        backBtn3?.addEventListener("click", () => {
+          clearAllAnswers() // Очищуємо всі відповіді при поверненні
+          showQuestion("question-1")
+        })
       }
 
       function openPopup(name) {
@@ -1051,6 +1066,7 @@
         closeBtn?.addEventListener("click", closePopup)
         backBtn?.addEventListener("click", () => {
           closePopup()
+          clearAllAnswers() // Очищуємо всі відповіді при "Повторити тест"
           showQuestion("question-1")
         })
         gotoBtn?.addEventListener("click", () => {
@@ -1078,11 +1094,49 @@
         if (tarifsSection) tarifsSection.scrollIntoView({ behavior: "smooth" })
       }
 
-      // закривати попап по натисканню на overlay
+      // Закривати попап по натисканню на overlay
       popup.addEventListener("click", e => {
         if (!e.target.closest(".content")) closePopup()
       })
 
+      // Функція для генерації унікальних ID для SVG градієнтів (фікс SVG проблеми)
+      function makeUniqueSVGIds() {
+        const svgs = document.querySelectorAll('svg')
+
+        svgs.forEach((svg, index) => {
+          const defs = svg.querySelector('defs')
+          if (!defs) return
+
+          const gradients = defs.querySelectorAll('linearGradient')
+          gradients.forEach(gradient => {
+            const oldId = gradient.id
+            const newId = `${oldId}_${index}_${Math.random().toString(36).substr(2, 9)}`
+
+            gradient.id = newId
+
+            const paths = svg.querySelectorAll(`path[fill="url(#${oldId})"]`)
+            paths.forEach(path => {
+              path.setAttribute('fill', `url(#${newId})`)
+            })
+          })
+        })
+      }
+
+      makeUniqueSVGIds()
+
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.target.classList && mutation.target.classList.contains('popup')) {
+            if (mutation.target.classList.contains('active')) {
+              setTimeout(makeUniqueSVGIds, 10)
+            }
+          }
+        })
+      })
+
+      if (popup) {
+        observer.observe(popup, { attributes: true, attributeFilter: ['class'] })
+      }
     });
 
   </script>
