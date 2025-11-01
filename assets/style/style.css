@@ -367,6 +367,17 @@ main {
     max-width: 580px;
   }
 }
+@keyframes blik {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .top_content .container .name {
   padding-top: 52dvh;
   width: 100%;
@@ -1464,6 +1475,8 @@ main {
   margin-bottom: 12px;
 }
 .more_question .container h4 span {
+  display: flex;
+  align-items: center;
   font-family: "Montserrat";
   font-weight: 800;
   font-style: Italic;
@@ -1475,6 +1488,21 @@ main {
   background: linear-gradient(90deg, #d42222 0%, #f85858 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.more_question .container h4 span i {
+  font-family: "Montserrat";
+  font-weight: 800;
+  font-style: Italic;
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: -8%;
+  text-align: center;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #d42222 0%, #f85858 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 25px;
+  animation: blik 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.5s infinite;
 }
 @media screen and (min-width: 520px) {
   .more_question .container h4 {

@@ -221,6 +221,18 @@ main {
       }
     }
 
+    @keyframes blik {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
     & .name {
       padding-top: 52dvh;
       width: 100%;
@@ -1479,13 +1491,9 @@ main {
       border-radius: 100%;
       object-fit: contain;
       object-position: center;
-
-      // Градієнтний border через box-shadow
       box-shadow:
         0 0 0 2px transparent,
         inset 0 0 0 2px transparent;
-
-      // Або використайте обгортку з градієнтом
       padding: 2px;
       background: linear-gradient(92.91deg, #ffffff 57.15%, rgba(255, 255, 255, 0) 102.98%);
       background-clip: padding-box;
@@ -1508,6 +1516,8 @@ main {
       margin-bottom: 12px;
 
       & span {
+        display: flex;
+        align-items: center;
         font-family: "Montserrat";
         font-weight: 800;
         font-style: Italic;
@@ -1519,6 +1529,22 @@ main {
         background: linear-gradient(90deg, #d42222 0%, #f85858 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+
+        & i {
+          font-family: "Montserrat";
+          font-weight: 800;
+          font-style: Italic;
+          font-size: 40px;
+          line-height: 44px;
+          letter-spacing: -8%;
+          text-align: center;
+          text-transform: uppercase;
+          background: linear-gradient(90deg, #d42222 0%, #f85858 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          width: 25px;
+          animation: blik 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.5s infinite;
+        }
       }
 
       @media screen and (min-width: 520px) {
