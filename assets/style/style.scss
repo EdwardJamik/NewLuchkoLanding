@@ -536,6 +536,7 @@ main {
         flex-direction: column;
         gap: 8px;
         & .tarif_item {
+          cursor: pointer;
           position: relative;
           padding: 42px 20px 40px;
           background: #ededed;
@@ -1082,7 +1083,7 @@ main {
     & .content {
       background-image: url("/assets/images/question_background.png");
       background-repeat: no-repeat;
-      background-size: 100% 100%;
+      background-size: contain;
       padding: 94px 16px 16px;
       min-height: 460px;
 
@@ -1469,8 +1470,10 @@ main {
       right: 0;
       margin: 0 auto;
       width: 92px;
-      height: 92px;
+      height: 91px;
       border-radius: 100%;
+      object-fit: contain;
+      object-position: center;
     }
 
     & h4 {
